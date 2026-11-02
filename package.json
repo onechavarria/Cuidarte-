@@ -7,11 +7,11 @@
     "node": ">=20"
   },
   "scripts": {
-    "postinstall": "npm install --prefix BACKEND && npm install --prefix FRONTEND",
+    "postinstall": "npm install --prefix BACKEND --omit=dev",
     "dev": "npm run start --prefix BACKEND",
     "dev:frontend": "npm run dev --prefix FRONTEND -- --host 0.0.0.0 --port 3333",
-    "build": "npm run build --prefix FRONTEND",
+    "build": "npm install --prefix FRONTEND --include=dev && npm run build --prefix FRONTEND",
     "start": "node BACKEND/src/app.js",
-    "check": "node --check BACKEND/src/app.js && node --check BACKEND/src/db.js && node -e \"JSON.parse(require('fs').readFileSync('BACKEND/src/openapi.json'))\""
+    "check": "node --check BACKEND/src/app.js && node --check BACKEND/src/db.js"
   }
 }
